@@ -1,7 +1,7 @@
 
 # Node LMS with CI/CD
 
-A simple Learning Management System (LMS) built with Node.js and Express.
+A learning management system built with Node.js, featuring a complete CI/CD pipeline using GitHub Actions. The project demonstrates automated testing, continuous integration, and automatic deployment to an Ubuntu server using a self-hosted runner and PM2 for process management.
 
 ## Features
 - User management
