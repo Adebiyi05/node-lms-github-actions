@@ -1,4 +1,4 @@
-name: Node.js CI/CD
+name: Node.js CI/CD (Self-Hosted)
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -23,15 +23,10 @@ jobs:
       - name: Run tests
         run: npm test
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          script: |
-            cd ${{ secrets.APP_PATH }}
-            git pull origin main
-            npm install --production
-            pm2 restart raderlms
+      - name: Deploy locally
+        run: |
+          cd /var/www/raderlms
+          git pull origin main
+          npm install --production
+          pm2 restart raderlms
 
